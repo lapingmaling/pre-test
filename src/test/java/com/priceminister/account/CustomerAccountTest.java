@@ -46,7 +46,7 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
-        customerAccount.add(1.0D);
+        customerAccount.add(1.0);
         assertTrue(customerAccount.getBalance()>0);
     }
     
@@ -61,7 +61,13 @@ public class CustomerAccountTest {
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException {
         exception.expect(IllegalBalanceException.class);
-        customerAccount.withdrawAndReportBalance(2.0D,rule);
+        customerAccount.withdrawAndReportBalance(2.0,rule);
+    }
+
+    @Test
+    public void testWithdrawAndReportBalanceIllegalBalanceWithNegativeWithdraw() throws IllegalBalanceException {
+        exception.expect(IllegalBalanceException.class);
+        customerAccount.withdrawAndReportBalance(-2.0,rule);
     }
     
     // Also implement missing unit tests for the above functionalities.

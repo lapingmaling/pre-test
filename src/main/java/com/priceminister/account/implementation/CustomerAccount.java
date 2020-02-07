@@ -17,11 +17,13 @@ public class CustomerAccount implements Account {
 
     public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule) 
     		throws IllegalBalanceException {
-        Double resultingAccountingBalance = new Double(balance - withdrawnAmount);
-        if (!rule.withdrawPermitted(resultingAccountingBalance)) {
-            throw new IllegalBalanceException(withdrawnAmount);
+        Double resultingAccountingBalance = null;
+        if (withdrawnAmount != null && rule != null ){
+            resultingAccountingBalance = balance - withdrawnAmount;
+            if (withdrawnAmount <= 0 || !rule.withdrawPermitted(resultingAccountingBalance)) {
+                throw new IllegalBalanceException(withdrawnAmount);
+            }
         }
         return resultingAccountingBalance;
     }
-
 }
